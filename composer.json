@@ -1,0 +1,12 @@
+{
+    "name": "toshi/php-parser-combinator",
+    "description": "Parser combinator for PHP",
+    "require-dev": {
+        "phpunit/phpunit": "3.7.27",
+        "phpunithelper/phpunithelper": "dev-master"
+    },
+    "license": "BSD-3-Clause",
+    "autoload":{
+        "psr-0":{ "PHPParserCombinator": ["src/", "test/"] }
+    }
+}
