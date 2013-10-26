@@ -1,6 +1,8 @@
 <?php
-namespace PHPParserCombinator;
+namespace PHPParserCombinator\Parser;
 
+
+use PHPParserCombinator\Result\Success;
 
 class RepetitionParser extends Parser implements ParserInterface {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPParserCombinator;
+namespace PHPParserCombinator\Result;
 
 
 abstract class Result {

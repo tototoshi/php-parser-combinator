@@ -1,5 +1,5 @@
 <?php
-namespace PHPParserCombinator;
+namespace PHPParserCombinator\Result;
 
 
 class Success extends Result {

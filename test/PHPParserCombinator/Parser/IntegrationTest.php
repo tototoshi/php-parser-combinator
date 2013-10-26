@@ -1,5 +1,5 @@
 <?php
-namespace PHPParserCombinator;
+namespace PHPParserCombinator\Parser;
 
 class IntegrationTest extends \PHPUnit_Framework_TestCase
 {

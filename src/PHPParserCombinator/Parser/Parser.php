@@ -1,7 +1,9 @@
 <?php
 
-namespace PHPParserCombinator;
+namespace PHPParserCombinator\Parser;
 
+
+use PHPParserCombinator\Transformer\Transformer;
 
 abstract class Parser {
 

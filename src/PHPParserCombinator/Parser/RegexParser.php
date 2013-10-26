@@ -1,6 +1,8 @@
 <?php
-namespace PHPParserCombinator;
+namespace PHPParserCombinator\Parser;
 
+use PHPParserCombinator\Result\Failure;
+use PHPParserCombinator\Result\Success;
 
 class RegexParser extends Parser implements ParserInterface
 {

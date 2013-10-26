@@ -1,6 +1,8 @@
 <?php
-namespace PHPParserCombinator;
+namespace PHPParserCombinator\Parser;
 
+
+use PHPParserCombinator\Result\Success;
 
 class SequenceParser extends Parser implements ParserInterface
 {

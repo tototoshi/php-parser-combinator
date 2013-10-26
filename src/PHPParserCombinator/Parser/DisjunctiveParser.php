@@ -1,6 +1,7 @@
 <?php
-namespace PHPParserCombinator;
+namespace PHPParserCombinator\Parser;
 
+use PHPParserCombinator\Result\Success;
 
 class DisjunctiveParser extends Parser implements ParserInterface {
 

@@ -1,6 +1,10 @@
 <?php
-namespace PHPParserCombinator;
+namespace PHPParserCombinator\Parser;
 
+
+use PHPParserCombinator\Result\Failure;
+use PHPParserCombinator\Result\Success;
+use PHPParserCombinator\Transformer\Transformer;
 
 class StringParser extends Parser implements ParserInterface
 {

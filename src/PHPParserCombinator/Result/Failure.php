@@ -1,5 +1,5 @@
 <?php
-namespace PHPParserCombinator;
+namespace PHPParserCombinator\Result;
 
 
 use PHPParserCombinator\Exception\UnsuppotedOperationException;
