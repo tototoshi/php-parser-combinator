@@ -13,7 +13,7 @@ class Transformer
 
     public static function asIs() {
         return function ($value) {
-            return array($value);
+            return $value;
         };
     }
 }

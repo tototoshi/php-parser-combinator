@@ -6,8 +6,6 @@ class RepetitionParser extends Parser implements ParserInterface {
 
     private $parser;
 
-    private $skipWhitespace;
-
     private $times;
 
     public function __construct(ParserInterface $parser, array $option = array())
@@ -30,9 +28,7 @@ class RepetitionParser extends Parser implements ParserInterface {
         while (true) {
             if ($this->times === 0) break;
 
-            if ($this->skipWhitespace) {
-                $input = ltrim($input);
-            }
+            $input = $this->ltrimWhitespace($input);
 
             $result = $this->parser->parse($input);
 

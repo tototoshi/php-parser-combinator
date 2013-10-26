@@ -58,5 +58,28 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testParseCSV()
+    {
+        $csv = "abc,def,ghi\njkl,mno,pqr";
+
+        $field = new RegexParser('/[a-z]+/');
+        $separator = new StringParser(',');
+        $newline = new StringParser("\n");
+
+        $option = array('skipWhitespace' => false);
+        $expected = array(
+            array(array('abc', 'def', 'ghi'), array('jkl', 'mno', 'pqr'))
+        );
+
+        $actual =
+            Parsers::repsep(
+                Parsers::repsep($field, $separator, $option),
+                $newline,
+                $option
+            )
+            ->parse($csv)
+            ->getValue();
+        $this->assertEquals($expected, $actual);
+    }
 
 }
