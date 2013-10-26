@@ -10,11 +10,10 @@ class SequenceParser extends Parser
 
     private $append;
 
-    public function __construct($left, $right, $append = false)
+    public function __construct($left, $right)
     {
         $this->left = $left;
         $this->right = $right;
-        $this->append = $append;
     }
 
     public function next($parser)
@@ -28,13 +27,7 @@ class SequenceParser extends Parser
         if ($res_left->isSuccess()) {
             $res_right = $this->right->parse($res_left->getRest());
             if ($res_right->isSuccess()) {
-                if ($this->append) {
-                    $value = $res_left->getValue();
-                    $value[] = $res_right->getValue();
-                } else {
-                    $value = array($res_left->getValue(), $res_right->getValue());
-                }
-
+                $value = array_merge($res_left->getValue(), $res_right->getValue());
                 return
                     new Success(
                         $value,
