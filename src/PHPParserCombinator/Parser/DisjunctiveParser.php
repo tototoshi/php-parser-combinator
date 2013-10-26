@@ -1,6 +1,7 @@
 <?php
 namespace PHPParserCombinator\Parser;
 
+use PHPParserCombinator\Result\ParsedValue;
 use PHPParserCombinator\Result\Success;
 
 class DisjunctiveParser extends Parser implements ParserInterface {
@@ -22,10 +23,11 @@ class DisjunctiveParser extends Parser implements ParserInterface {
             return $res_left;
         } else {
             $res_right = $this->right->parse($input);
+            $transformer = $this->getTransformer();
             if ($res_right->isSuccess()) {
                 return
                     new Success(
-                        $res_right->getValue(),
+                        new ParsedValue($transformer($res_right->get())),
                         $res_right->getRest()
                     );
             } else {

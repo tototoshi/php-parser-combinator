@@ -5,14 +5,14 @@ wip.
 ## Example
 
 ```php
-    $git = Parsers::s('git')->setIgnoreResult(true);
-    $at = Parsers::s('@')->setIgnoreResult(true);
-    $github = Parsers::s("github.com")->setIgnoreResult(true);
-    $colon = Parsers::s(':')->setIgnoreResult(true);
+    $git = Parsers::s('git');
+    $at = Parsers::s('@');
+    $github = Parsers::s("github.com");
+    $colon = Parsers::s(':');
     $user = Parsers::reg('/[a-zA-Z0-9]+/');
-    $slash = Parsers::s('/')->setIgnoreResult(true);
+    $slash = Parsers::s('/');
     $repository = Parsers::reg('/[a-zA-Z-_0-9]+/');
-    $ext = Parsers::s('.git')->setIgnoreResult(true);
+    $ext = Parsers::s('.git');
 
     $parser = $git
         ->next($at)
@@ -23,8 +23,9 @@ wip.
         ->next($repository)
         ->next($ext);
 
+    $result = $parser->parse("git@github.com:tototoshi/php-parser-combinator.git")->get();
     $this->assertEquals(
         array('tototoshi', 'php-parser-combinator'),
-        $parser->parse("git@github.com:tototoshi/php-parser-combinator.git")->getValue()
+        array($result[4], $result[6])
     );
 ```

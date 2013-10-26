@@ -3,6 +3,7 @@ namespace PHPParserCombinator\Parser;
 
 
 use PHPParserCombinator\Result\Failure;
+use PHPParserCombinator\Result\ParsedValue;
 use PHPParserCombinator\Result\Success;
 use PHPParserCombinator\Transformer\Transformer;
 
@@ -14,23 +15,19 @@ class StringParser extends Parser implements ParserInterface
     public function __construct($value, Callable $transformer = null)
     {
         $this->value = $value;
-        if ($transformer === null) {
-            $this->transformer = Transformer::asIs();
-        } else {
-            $this->transformer = $transformer;
-        }
+
     }
 
     public function parse($input)
     {
         if (strpos($input, $this->value) === 0) {
             $transformer = $this->getTransformer();
-            if ($this->ignoreResult) {
-                $value = array();
-            } else {
-                $value = array($transformer($this->value));
-            }
-            return new Success($value, substr($input, strlen($this->value)));
+            $value = $transformer($this->value);
+            return new Success(
+                new ParsedValue($value),
+                substr($input, strlen($this->value)),
+                $this->getTransformer()
+            );
         } else {
             $expected = $this->value;
             $actual = substr($input, 0, strlen($this->value));

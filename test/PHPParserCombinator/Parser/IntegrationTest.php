@@ -14,7 +14,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $p = $p1->next($p2)->next($p3->orElse($p4))->next($p5);
         $this->assertEquals(
             array('hoge', 'moge', 'piyo', 'buzz'),
-            $p->parse("hogemogepiyobuzz")->getValue()
+            $p->parse("hogemogepiyobuzz")->get()
         );
     }
 
@@ -27,7 +27,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $parser_b_c = new RepetitionParser($parser_b->orElse($parser_c));
         $this->assertEquals(
             array(array('a', 'a', 'a'), array('b', 'b', 'c', 'b')),
-            $parser_a->next($parser_b_c)->parse($input)->getValue()
+            $parser_a->next($parser_b_c)->parse($input)->get()
         );
     }
 
@@ -42,7 +42,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $p = $p1->next($p2, $option)->next($p3->orElse($p4), $option)->next($p5, $option);
         $this->assertEquals(
             array('hoge', 'moge', 'piyo', 'buzz'),
-            $p->parse("hogemogepiyo buzz")->getValue()
+            $p->parse("hogemogepiyo buzz")->get()
         );
     }
 
@@ -54,20 +54,20 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $p = $local_part->next($at)->next($domain_part);
         $this->assertEquals(
             array('hoge', '@', 'example.com'),
-            $p->parse('hoge@example.com')->getValue()
+            $p->parse('hoge@example.com')->get()
         );
     }
 
     public function testParseGitUrl()
     {
-        $git = Parsers::s('git')->setIgnoreResult(true);
-        $at = Parsers::s('@')->setIgnoreResult(true);
-        $github = Parsers::s("github.com")->setIgnoreResult(true);
-        $colon = Parsers::s(':')->setIgnoreResult(true);
+        $git = Parsers::s('git');
+        $at = Parsers::s('@');
+        $github = Parsers::s("github.com");
+        $colon = Parsers::s(':');
         $user = Parsers::reg('/[a-zA-Z0-9]+/');
-        $slash = Parsers::s('/')->setIgnoreResult(true);
+        $slash = Parsers::s('/');
         $repository = Parsers::reg('/[a-zA-Z-_0-9]+/');
-        $ext = Parsers::s('.git')->setIgnoreResult(true);
+        $ext = Parsers::s('.git');
 
         $parser = $git
             ->next($at)
@@ -78,35 +78,13 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             ->next($repository)
             ->next($ext);
 
+        $result = $parser->parse("git@github.com:tototoshi/php-parser-combinator.git")->get();
         $this->assertEquals(
             array('tototoshi', 'php-parser-combinator'),
-            $parser->parse("git@github.com:tototoshi/php-parser-combinator.git")->getValue()
+            array($result[4], $result[6])
         );
 
     }
 
-    public function testParseCSV()
-    {
-        $csv = "abc,def,ghi\njkl,mno,pqr";
-
-        $field = new RegexParser('/[a-z]+/');
-        $separator = new StringParser(',');
-        $newline = new StringParser("\n");
-
-        $option = array('skipWhitespace' => false);
-        $expected = array(
-            array(array('abc', 'def', 'ghi'), array('jkl', 'mno', 'pqr'))
-        );
-
-        $actual =
-            Parsers::repsep(
-                Parsers::repsep($field, $separator, $option),
-                $newline,
-                $option
-            )
-            ->parse($csv)
-            ->getValue();
-        $this->assertEquals($expected, $actual);
-    }
 
 }

@@ -2,6 +2,7 @@
 namespace PHPParserCombinator\Parser;
 
 
+use PHPParserCombinator\Result\ParsedValue;
 use PHPParserCombinator\Result\Success;
 
 class RepetitionParser extends Parser implements ParserInterface {
@@ -27,6 +28,8 @@ class RepetitionParser extends Parser implements ParserInterface {
     {
         $result_values = array();
 
+        $transformer = $this->getTransformer();
+
         while (true) {
             if ($this->times === 0) break;
 
@@ -44,11 +47,11 @@ class RepetitionParser extends Parser implements ParserInterface {
                 }
             }
 
-            $result_values = array_merge($result_values, $result->getValue());
+            array_push($result_values, $transformer($result->get()));
             $input = $result->getRest();
         }
 
-        return new Success(array($result_values), $input);
+        return new Success(new ParsedValue($result_values), $input);
     }
 
 }

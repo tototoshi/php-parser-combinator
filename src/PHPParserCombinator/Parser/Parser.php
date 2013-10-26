@@ -7,8 +7,6 @@ use PHPParserCombinator\Transformer\Transformer;
 
 abstract class Parser {
 
-    protected $ignoreResult = false;
-
     protected $skipWhitespace = true;
 
     protected $transformer;
@@ -60,12 +58,6 @@ abstract class Parser {
     public function orElse(ParserInterface $parser)
     {
         return new DisjunctiveParser($this, $parser);
-    }
-
-    public function setIgnoreResult($ignoreResult)
-    {
-        $this->ignoreResult = $ignoreResult;
-        return $this;
     }
 
 }

@@ -2,7 +2,6 @@
 
 namespace PHPParserCombinator\Transformer;
 
-
 class Transformer
 {
     public static function ignore() {

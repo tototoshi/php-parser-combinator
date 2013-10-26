@@ -17,12 +17,6 @@ interface ParserInterface {
     function next(ParserInterface $input);
 
     /**
-     * @param bool $ignoreResult
-     * @return ParserInterface
-     */
-    function setIgnoreResult($ignoreResult);
-
-    /**
      * @param callable $transformer
      * @return ParserInterface
      */

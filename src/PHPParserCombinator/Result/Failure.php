@@ -4,7 +4,7 @@ namespace PHPParserCombinator\Result;
 
 use PHPParserCombinator\Exception\UnsuppotedOperationException;
 
-class Failure extends Result
+class Failure extends ParseResult
 {
     private $message;
 
@@ -34,7 +34,7 @@ class Failure extends Result
         return 'Failure[msg=' . $this->message . ', rest=' . $this->rest .']';
     }
 
-    public function getValue()
+    public function get()
     {
         throw new UnsuppotedOperationException();
     }
