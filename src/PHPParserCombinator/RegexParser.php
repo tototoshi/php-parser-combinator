@@ -2,7 +2,7 @@
 namespace PHPParserCombinator;
 
 
-class RegexParser extends Parser
+class RegexParser extends Parser implements ParserInterface
 {
     private $regex;
 

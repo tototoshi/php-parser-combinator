@@ -2,18 +2,17 @@
 namespace PHPParserCombinator;
 
 
-class DisjunctiveParser extends Parser {
+class DisjunctiveParser extends Parser implements ParserInterface {
 
     private $left;
 
     private $right;
 
-    public function __construct($left, $right)
+    public function __construct(ParserInterface $left, ParserInterface $right)
     {
         $this->left = $left;
         $this->right = $right;
     }
-
 
     public function parse($input)
     {

@@ -2,15 +2,15 @@
 namespace PHPParserCombinator;
 
 
-class SequenceParser extends Parser
+class SequenceParser extends Parser implements ParserInterface
 {
     /**
-     * @var Parser $left
+     * @var ParserInterface $left
      */
     private $left;
 
     /**
-     * @var Parser $right
+     * @var ParserInterface $right
      */
     private $right;
 
@@ -19,7 +19,7 @@ class SequenceParser extends Parser
      */
     private $skipWhitespace;
 
-    public function __construct($left, $right, array $option = array())
+    public function __construct(ParserInterface $left, ParserInterface $right, array $option = array())
     {
         $option_default = array(
             'skipWhitespace' => true

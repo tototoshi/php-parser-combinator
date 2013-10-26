@@ -2,7 +2,7 @@
 namespace PHPParserCombinator;
 
 
-class StringParser extends Parser
+class StringParser extends Parser implements ParserInterface
 {
 
     private $value;
