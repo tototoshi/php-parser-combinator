@@ -25,11 +25,11 @@ class RegexParser extends Parser
                 $transformer = $this->callback;
                 return new Success($transformer($matches[0]), substr($input, strlen($matches[0])));
             } else {
-                return new Failure('Pattern of ' . $this->regex . ' is expected but $input found');
+                return new Failure('Pattern of ' . $this->regex . ' is expected but $input found', $input);
             }
 
         } else {
-            return new Failure('Pattern of ' . $this->regex . ' is expected but ' . $input . ' found');
+            return new Failure('Pattern of ' . $this->regex . ' is expected but ' . $input . ' found', $input);
         }
     }
 }

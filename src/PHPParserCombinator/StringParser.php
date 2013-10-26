@@ -27,7 +27,7 @@ class StringParser extends Parser
         } else {
             $expected = $this->value;
             $actual = substr($input, 0, strlen($this->value));
-            return new Failure("$expected is expected but $actual found.");
+            return new Failure("$expected is expected but $actual found.", $input);
         }
     }
 }
