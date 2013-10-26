@@ -18,6 +18,19 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testParse2()
+    {
+        $input = 'aaabbcb';
+        $parser_a = new RepetitionParser(new StringParser("a"));
+        $parser_b = new StringParser("b");
+        $parser_c = new StringParser("c");
+        $parser_b_c = new RepetitionParser($parser_b->orElse($parser_c));
+        $this->assertEquals(
+            array(array('a', 'a', 'a'), array('b', 'b', 'c', 'b')),
+            $parser_a->next($parser_b_c)->parse($input)->getValue()
+        );
+    }
+
     public function testParseIgnoringSpace()
     {
         $p1 = new StringParser("hoge");
