@@ -4,8 +4,14 @@ namespace PHPParserCombinator;
 
 class SequenceParser extends Parser
 {
+    /**
+     * @var Parser $left
+     */
     private $left;
 
+    /**
+     * @var Parser $right
+     */
     private $right;
 
     /**
