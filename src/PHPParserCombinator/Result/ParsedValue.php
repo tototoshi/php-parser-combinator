@@ -21,4 +21,9 @@ class ParsedValue {
         return $this->value;
     }
 
+    public function transform(Callable $transform)
+    {
+        $this->value = $transform($this->value);
+    }
+
 }

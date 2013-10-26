@@ -43,9 +43,9 @@ class SequenceParser extends Parser implements ParserInterface
             $rest = $this->ltrimWhitespace($rest);
             $res_right = $this->right->parse($rest);
             if ($res_right->isSuccess()) {
-                $transformer = $this->getTransformer();
                 $value = $res_left->getParsedValue()->append(new ParsedValue($res_right->get()));
-                return new Success($transformer($value), $res_right->getRest());
+                $value->transform($this->getTransformer());
+                return new Success($value, $res_right->getRest());
             } else {
                 return $res_right;
             }
