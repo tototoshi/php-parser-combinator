@@ -6,7 +6,7 @@ use PHPParserCombinator\Exception\UnsuppotedOperationException;
 
 class Failure extends Result
 {
-    private $msg;
+    private $message;
 
     private $rest;
 
@@ -25,18 +25,23 @@ class Failure extends Result
 
     public function __construct($msg, $rest)
     {
-        $this->msg = $msg;
+        $this->message = $msg;
         $this->rest = $rest;
     }
 
     function __toString()
     {
-        return 'Failure[msg=' . $this->msg . ', rest=' . $this->rest .']';
+        return 'Failure[msg=' . $this->message . ', rest=' . $this->rest .']';
     }
 
     public function getValue()
     {
         throw new UnsuppotedOperationException();
+    }
+
+    public function getMessage()
+    {
+        return $this->message;
     }
 
 }
