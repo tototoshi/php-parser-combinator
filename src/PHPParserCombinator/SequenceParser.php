@@ -8,24 +8,46 @@ class SequenceParser extends Parser
 
     private $right;
 
-    private $append;
+    /**
+     * @var bool $skipWhitespace
+     */
+    private $skipWhitespace;
 
-    public function __construct($left, $right)
+    public function __construct($left, $right, array $option = array())
     {
+        $option_default = array(
+            'skipWhitespace' => true
+        );
+        $option = array_merge($option_default, $option);
+
+        $this->skipWhitespace = $option['skipWhitespace'];
+
         $this->left = $left;
         $this->right = $right;
     }
 
-    public function next($parser)
-    {
-        return new SequenceParser($this, $parser, $append = true);
-    }
-
     public function parse($input)
     {
+        /*
+         * if $skipWhitespace is true, trim whitespaces
+         */
+        if ($this->skipWhitespace) {
+            $input = ltrim($input);
+        }
+
         $res_left = $this->left->parse($input);
         if ($res_left->isSuccess()) {
-            $res_right = $this->right->parse($res_left->getRest());
+
+            /*
+             * Get rest of the input.
+             * if $skipWhitespace is true, trim whitespaces
+             */
+            $rest = $res_left->getRest();
+            if ($this->skipWhitespace) {
+                $rest = ltrim($rest);
+            }
+
+            $res_right = $this->right->parse($rest);
             if ($res_right->isSuccess()) {
                 $value = array_merge($res_left->getValue(), $res_right->getValue());
                 return
