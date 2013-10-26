@@ -19,4 +19,11 @@ class Parsers {
         return new RepetitionParser($p, $option);
     }
 
+    public static function repN($n, ParserInterface $p, array $option = array())
+    {
+        $option_times = array('times' => $n);
+        $option = array_merge($option_times, $option);
+        return new RepetitionParser($p, $option);
+    }
+
 }
