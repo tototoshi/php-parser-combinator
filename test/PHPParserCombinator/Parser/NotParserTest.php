@@ -6,9 +6,11 @@ class NotParserTest extends \PHPUnit_Framework_TestCase
 
     public function testParse()
     {
-        $p = Parsers::not(Parsers::s('a'));
-        $this->assertEquals(array(), $p->parse('b')->get());
-        $this->assertFalse($p->parse('a')->isSuccess());
+        $p_not_a = Parsers::not(Parsers::s('a'));
+        $p_b = Parsers::s('b');
+        $this->assertEquals(array(), $p_not_a->parse('b')->get());
+        $this->assertEquals(array('b'), $p_not_a->next($p_b)->parse('b')->get());
+        $this->assertFalse($p_not_a->parse('a')->isSuccess());
     }
 
 }
