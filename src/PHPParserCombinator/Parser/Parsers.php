@@ -2,6 +2,8 @@
 namespace PHPParserCombinator\Parser;
 
 
+use PHPParserCombinator\Transformer\Transformer;
+
 class Parsers {
 
     public static function s($s)
@@ -32,12 +34,17 @@ class Parsers {
             ->next(
                 Parsers::rep(
                     $sep->next($p)
-                        ->setTransformer(function ($result) {
-                            return $result[1];
-                        })))
+                        ->setTransformer(Transformer::second())
+                )
+            )
             ->setTransformer(function ($result) {
                 return array_merge(array($result[0]), $result[1]);
             });
+    }
+
+    public static function between(ParserInterface $begin, ParserInterface $p, ParserInterface $end)
+    {
+        return $begin->next($p)->next($end)->setTransformer(Transformer::second());
     }
 
 }

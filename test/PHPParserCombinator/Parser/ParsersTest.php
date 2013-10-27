@@ -37,4 +37,23 @@ class ParsersTest extends \PHPUnit_Framework_TestCase
             $parser_a->parse($input)->get()
         );
     }
+
+    public function testBetween()
+    {
+        $input = '((a))';
+        $parser_a = Parsers::between(
+            Parsers::s('('),
+            Parsers::between(
+                Parsers::s('('),
+                Parsers::s('a'),
+                Parsers::s(')')
+            ),
+            Parsers::s(')')
+        );
+        $this->assertEquals(
+            'a',
+            $parser_a->parse($input)->get()
+        );
+    }
+
 }
