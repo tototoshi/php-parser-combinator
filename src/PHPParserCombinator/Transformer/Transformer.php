@@ -38,4 +38,17 @@ class Transformer
             return $xs[2];
         };
     }
+
+    public static function nth()
+    {
+        $args = func_get_args();
+        return function ($xs) use ($args) {
+            $value = array();
+            foreach ($args as $arg) {
+                $value[] = $xs[$arg];
+            }
+            return $value;
+        };
+    }
+
 }

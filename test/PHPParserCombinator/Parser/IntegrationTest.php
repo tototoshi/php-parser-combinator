@@ -1,6 +1,8 @@
 <?php
 namespace PHPParserCombinator\Parser;
 
+use PHPParserCombinator\Transformer\Transformer;
+
 class IntegrationTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -69,21 +71,40 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $repository = Parsers::reg('/[a-zA-Z-_0-9]+/');
         $ext = Parsers::s('.git');
 
-        $parser = $git
+        $parser1 = $git
             ->next($at)
             ->next($github)
             ->next($colon)
             ->next($user)
             ->next($slash)
             ->next($repository)
-            ->next($ext);
+            ->next($ext)
+            ->setTransformer(Transformer::nth(4, 6));
 
-        $result = $parser->parse("git@github.com:tototoshi/php-parser-combinator.git")->get();
+        $https = Parsers::s('https');
+
+        $parser2 = $https
+            ->next($colon)
+            ->next(Parsers::repN(2, $slash))
+            ->next($github)
+            ->next($slash)
+            ->next($user)
+            ->next($slash)
+            ->next($repository)
+            ->next($ext)
+            ->setTransformer(Transformer::nth(5, 7));
+
+        $parser = $parser1->orElse($parser2);
+
         $this->assertEquals(
             array('tototoshi', 'php-parser-combinator'),
-            array($result[4], $result[6])
+            $parser->parse("git@github.com:tototoshi/php-parser-combinator.git")->get()
         );
 
+        $this->assertEquals(
+            array('tototoshi', 'php-parser-combinator'),
+            $parser->parse('https://github.com/tototoshi/php-parser-combinator.git')->get()
+        );
     }
 
 
