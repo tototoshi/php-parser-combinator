@@ -17,6 +17,12 @@ interface ParserInterface {
     function next(ParserInterface $input);
 
     /**
+     * @param ParserInterface $input
+     * @return ParserInterface
+     */
+    function orElse(ParserInterface $input);
+
+    /**
      * @param callable $transformer
      * @return ParserInterface
      */
