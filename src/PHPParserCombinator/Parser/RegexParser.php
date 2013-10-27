@@ -20,7 +20,7 @@ class RegexParser extends Parser implements ParserInterface
             if (strpos($input, $matches[0]) === 0) {
                 $transformer = $this->getTransformer();
                 return new Success(
-                    new ParsedValue($transformer($matches[0])),
+                    new ParsedValue($transformer(array($matches[0]))),
                     substr($input, strlen($matches[0]))
                 );
             } else {

@@ -6,7 +6,7 @@ interface ParserInterface {
 
     /**
      * @param string $input
-     * @return Result
+     * @return \PHPParserCombinator\Result\ParseResult
      */
     function parse($input);
 

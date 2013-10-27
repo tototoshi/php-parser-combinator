@@ -5,7 +5,6 @@ namespace PHPParserCombinator\Parser;
 use PHPParserCombinator\Result\Failure;
 use PHPParserCombinator\Result\ParsedValue;
 use PHPParserCombinator\Result\Success;
-use PHPParserCombinator\Transformer\Transformer;
 
 class StringParser extends Parser implements ParserInterface
 {
@@ -22,7 +21,7 @@ class StringParser extends Parser implements ParserInterface
     {
         if (strpos($input, $this->value) === 0) {
             $transformer = $this->getTransformer();
-            $value = $transformer($this->value);
+            $value = $transformer(array($this->value));
             return new Success(
                 new ParsedValue($value),
                 substr($input, strlen($this->value)),

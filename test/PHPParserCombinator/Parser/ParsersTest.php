@@ -33,7 +33,7 @@ class ParsersTest extends \PHPUnit_Framework_TestCase
         $input = 'a,a,a';
         $parser_a = Parsers::repsep(Parsers::s('a'), Parsers::s(','));
         $this->assertEquals(
-            array('a', 'a', 'a'),
+            array(array('a', 'a', 'a')),
             $parser_a->parse($input)->get()
         );
     }
@@ -51,7 +51,7 @@ class ParsersTest extends \PHPUnit_Framework_TestCase
             Parsers::s(')')
         );
         $this->assertEquals(
-            'a',
+            array('a'),
             $parser_a->parse($input)->get()
         );
     }

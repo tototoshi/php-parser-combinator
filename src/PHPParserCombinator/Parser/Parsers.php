@@ -11,6 +11,10 @@ class Parsers {
         return new StringParser($s);
     }
 
+    public static function opt(ParserInterface $p) {
+        return new OptionParser($p);
+    }
+
     public static function reg($reg)
     {
         return new RegexParser($reg);
@@ -38,7 +42,7 @@ class Parsers {
                 )
             )
             ->setTransformer(function ($result) {
-                return array_merge(array($result[0]), $result[1]);
+                return array(array_merge(array($result[0]), $result[1]));
             });
     }
 

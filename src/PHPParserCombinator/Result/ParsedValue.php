@@ -7,7 +7,7 @@ class ParsedValue {
 
     public function __construct($value)
     {
-        $this->value = array($value);
+        $this->value = $value;
     }
 
     public function append(ParsedValue $value)

@@ -6,8 +6,9 @@ class ParsedValueTest extends \PHPUnit_Framework_TestCase
 
     public function testAppend()
     {
-        $pv = new ParsedValue('a');
-        $this->assertEquals(array('a', 'b'), $pv->append(new ParsedValue('b'))->get());
+        $pv = new ParsedValue(array('a'));
+        $pv->append(new ParsedValue(array('b')));
+        $this->assertEquals(array('a', 'b'), $pv->get());
     }
 
 }

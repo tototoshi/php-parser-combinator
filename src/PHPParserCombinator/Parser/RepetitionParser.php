@@ -47,11 +47,11 @@ class RepetitionParser extends Parser implements ParserInterface {
                 }
             }
 
-            array_push($result_values, $transformer($result->get()));
+            $result_values = array_merge($result_values, $transformer($result->get()));
             $input = $result->getRest();
         }
 
-        return new Success(new ParsedValue($result_values), $input);
+        return new Success(new ParsedValue(array($result_values)), $input);
     }
 
 }

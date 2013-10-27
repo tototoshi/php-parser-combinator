@@ -9,7 +9,7 @@ class RepetitionParserTest extends \PHPUnit_Framework_TestCase
         $input = 'aaa';
         $parser_a = new RepetitionParser(new StringParser("a"));
         $this->assertEquals(
-            array('a', 'a', 'a'),
+            array(array('a', 'a', 'a')),
             $parser_a->parse($input)->get()
         );
     }
@@ -28,7 +28,7 @@ class RepetitionParserTest extends \PHPUnit_Framework_TestCase
         $options = array('times' => 3);
         $parser_a = new RepetitionParser(new StringParser("a"), $options);
         $this->assertEquals(
-            array('a', 'a', 'a'),
+            array(array('a', 'a', 'a')),
             $parser_a->parse($input)->get()
         );
     }

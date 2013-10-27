@@ -21,21 +21,21 @@ class Transformer
     public static function first()
     {
         return function($xs) {
-            return $xs[0];
+            return array($xs[0]);
         };
     }
 
     public static function second()
     {
         return function($xs) {
-            return $xs[1];
+            return array($xs[1]);
         };
     }
 
     public static function third()
     {
         return function($xs) {
-            return $xs[2];
+            return array($xs[2]);
         };
     }
 

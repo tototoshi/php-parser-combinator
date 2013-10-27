@@ -29,12 +29,7 @@ class Success extends ParseResult {
 
     public function get()
     {
-        $parsed_value = $this->value->get();
-        if (count($parsed_value) === 1) {
-            return $parsed_value[0];
-        } else {
-            return $parsed_value;
-        }
+        return $this->value->get();
     }
 
     public function getRest()
