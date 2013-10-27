@@ -61,14 +61,14 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
 
     public function testParseGitUrl()
     {
-        $git = Parsers::s('git');
-        $at = Parsers::s('@');
-        $github = Parsers::s("github.com");
-        $colon = Parsers::s(':');
-        $user = Parsers::reg('/[a-zA-Z0-9]+/');
-        $slash = Parsers::s('/');
-        $repository = Parsers::reg('/[a-zA-Z-_0-9]+/');
-        $ext = Parsers::s('.git');
+        $git = P::s('git');
+        $at = P::s('@');
+        $github = P::s("github.com");
+        $colon = P::s(':');
+        $user = P::reg('/[a-zA-Z0-9]+/');
+        $slash = P::s('/');
+        $repository = P::reg('/[a-zA-Z-_0-9]+/');
+        $ext = P::s('.git');
 
         $parser1 = $git
             ->next($at)
@@ -80,11 +80,11 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             ->next($ext)
             ->setTransformer(Transformer::nth(4, 6));
 
-        $https = Parsers::s('https');
+        $https = P::s('https');
 
         $parser2 = $https
             ->next($colon)
-            ->next(Parsers::repN(2, $slash))
+            ->next(P::repN(2, $slash))
             ->next($github)
             ->next($slash)
             ->next($user)
