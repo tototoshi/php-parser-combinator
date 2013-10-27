@@ -19,7 +19,8 @@ class StringParser extends Parser implements ParserInterface
 
     public function parse($input)
     {
-        if (strpos($input, $this->value) === 0) {
+        $trimmed_input = $this->ltrimWhitespace($input);
+        if (strpos($trimmed_input, $this->value) === 0) {
             $transformer = $this->getTransformer();
             $value = $transformer(array($this->value));
             return new Success(

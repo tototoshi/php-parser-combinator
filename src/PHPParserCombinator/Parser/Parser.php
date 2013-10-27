@@ -7,8 +7,6 @@ use PHPParserCombinator\Transformer\Transformer;
 
 abstract class Parser {
 
-    protected $skipWhitespace = true;
-
     protected $transformer;
 
     /**
@@ -30,18 +28,9 @@ abstract class Parser {
         }
     }
 
-    /**
-     * @param boolean $skipWhitespace
-     */
-    public function setSkipWhitespace($skipWhitespace)
-    {
-        $this->skipWhitespace = $skipWhitespace;
-        return $this;
-    }
-
     protected function ltrimWhitespace($input)
     {
-        if ($this->skipWhitespace) {
+        if (ParserSetting::$SKIP_WHITESPACE) {
             return ltrim($input);
         } else {
             return $input;

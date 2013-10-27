@@ -20,15 +20,6 @@ class SequenceParser extends Parser implements ParserInterface
 
     public function __construct(ParserInterface $left, ParserInterface $right, array $option = array())
     {
-        $option_default = array(
-            'ignoreResult' => false,
-            'skipWhitespace' => true
-        );
-        $option = array_merge($option_default, $option);
-
-        $this->skipWhitespace = $option['skipWhitespace'];
-        $this->ignoreResult = $option['ignoreResult'];
-
         $this->left = $left;
         $this->right = $right;
     }

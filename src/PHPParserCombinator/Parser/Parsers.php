@@ -6,8 +6,25 @@ use PHPParserCombinator\Transformer\Transformer;
 
 class Parsers {
 
+    public static function withParserSetting(array $setting, Callable $callable)
+    {
+        if (isset($setting['skipWhitespace'])) {
+            $skip_whitespace = $setting['skipWhitespace'];
+        } else {
+            $skip_whitespace = true;
+        }
+
+        $previous = ParserSetting::$SKIP_WHITESPACE;
+
+        ParserSetting::$SKIP_WHITESPACE = $skip_whitespace;
+
+        $callable();
+
+        ParserSetting::$SKIP_WHITESPACE = $previous;
+    }
+
     /**
-     * @param $s
+     * @param string $s
      * @return StringParser
      */
     public static function s($s)
@@ -34,7 +51,7 @@ class Parsers {
     }
 
     /**
-     * @param $reg
+     * @param string $reg regular expression
      * @return RegexParser
      */
     public static function reg($reg)

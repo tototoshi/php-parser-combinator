@@ -40,8 +40,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $p3 = new RegexParser("/poyo/");
         $p4 = new RegexParser("/piyo/");
         $p5 = new StringParser("buzz");
-        $option = array('skipWhitespace' => true);
-        $p = $p1->next($p2, $option)->next($p3->orElse($p4), $option)->next($p5, $option);
+        $p = $p1->next($p2)->next($p3->orElse($p4))->next($p5);
         $this->assertEquals(
             array('hoge', 'moge', 'piyo', 'buzz'),
             $p->parse("hogemogepiyo buzz")->get()

@@ -14,11 +14,9 @@ class RepetitionParser extends Parser implements ParserInterface {
     public function __construct(ParserInterface $parser, array $option = array())
     {
         $option_default = array(
-            'skipWhitespace' => true,
             'times' => -1
         );
         $option = array_merge($option_default, $option);
-        $this->skipWhitespace = $option['skipWhitespace'];
         $this->times = $option['times'];
 
         $this->parser = $parser;

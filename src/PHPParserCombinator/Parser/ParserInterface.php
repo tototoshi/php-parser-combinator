@@ -22,10 +22,4 @@ interface ParserInterface {
      */
     function setTransformer(Callable $transformer);
 
-    /**
-     * @param bool $skipWhitespace
-     * @return ParserInterface
-     */
-    function setSkipWhitespace($skipWhitespace);
-
 }
