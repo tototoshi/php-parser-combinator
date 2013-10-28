@@ -39,9 +39,9 @@ abstract class AbstractParser {
 
     abstract public function parse($input);
 
-    public function next(ParserInterface $parser, array $option = array())
+    public function next(ParserInterface $parser)
     {
-        return new SequenceParser($this, $parser, $option);
+        return new SequenceParser($this, $parser);
     }
 
     public function orElse(ParserInterface $parser)

@@ -18,7 +18,7 @@ class SequenceParser extends AbstractParser implements ParserInterface
     private $right;
 
 
-    public function __construct(ParserInterface $left, ParserInterface $right, array $option = array())
+    public function __construct(ParserInterface $left, ParserInterface $right)
     {
         $this->left = $left;
         $this->right = $right;
