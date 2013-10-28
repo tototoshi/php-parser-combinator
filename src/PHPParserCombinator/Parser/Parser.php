@@ -4,7 +4,7 @@ namespace PHPParserCombinator\Parser;
 
 use PHPParserCombinator\Transformer\Transformer;
 
-class Parsers {
+class Parser {
 
     public static function withParserSetting(array $setting, callable $callable)
     {
@@ -92,7 +92,7 @@ class Parsers {
     {
         return $p
             ->next(
-                Parsers::rep(
+                Parser::rep(
                     $sep->next($p)
                         ->setTransformer(Transformer::second())
                 )

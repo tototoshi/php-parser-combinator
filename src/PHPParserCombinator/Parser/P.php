@@ -2,5 +2,5 @@
 namespace PHPParserCombinator\Parser;
 
 
-class P extends Parsers {
+class P extends Parser {
 }

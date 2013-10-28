@@ -1,33 +1,31 @@
 <?php
 namespace PHPParserCombinator\Parser;
 
-use Symfony\Component\Yaml\Parser;
-
-class ParsersTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testWithParserSetting()
     {
-        $p = Parsers::reg('/a/');
+        $p = Parser::reg('/a/');
 
-        Parsers::withParserSetting(array('skipWhitespace' => true), function () use ($p) {
+        Parser::withParserSetting(array('skipWhitespace' => true), function () use ($p) {
             $this->assertTrue($p->parse('a')->isSuccess());
             $this->assertTrue($p->parse(' a')->isSuccess());
         });
 
-        Parsers::withParserSetting(array('skipWhitespace' => false), function () use ($p) {
+        Parser::withParserSetting(array('skipWhitespace' => false), function () use ($p) {
             $this->assertTrue($p->parse('a')->isSuccess());
             $this->assertFalse($p->parse(' a')->isSuccess());
         });
 
-        $p = Parsers::s('a');
+        $p = Parser::s('a');
 
-        Parsers::withParserSetting(array('skipWhitespace' => true), function () use ($p) {
+        Parser::withParserSetting(array('skipWhitespace' => true), function () use ($p) {
             $this->assertTrue($p->parse('a')->isSuccess());
             $this->assertTrue($p->parse(' a')->isSuccess());
         });
 
-        Parsers::withParserSetting(array('skipWhitespace' => false), function () use ($p) {
+        Parser::withParserSetting(array('skipWhitespace' => false), function () use ($p) {
             $this->assertTrue($p->parse('a')->isSuccess());
             $this->assertFalse($p->parse(' a')->isSuccess());
         });
@@ -35,11 +33,11 @@ class ParsersTest extends \PHPUnit_Framework_TestCase
 
     public function testShortcut()
     {
-        $p = Parsers::s('a')
-            ->next(Parsers::rep(Parsers::s('b')))
-            ->next(Parsers::reg('/c/'))
-            ->next(Parsers::repN(3, Parsers::s('d')))
-            ->next(Parsers::repsep(Parsers::s('e'), Parsers::s(',')));
+        $p = Parser::s('a')
+            ->next(Parser::rep(Parser::s('b')))
+            ->next(Parser::reg('/c/'))
+            ->next(Parser::repN(3, Parser::s('d')))
+            ->next(Parser::repsep(Parser::s('e'), Parser::s(',')));
 
         $this->assertEquals(
             array('a', array('b', 'b'), 'c', array('d', 'd', 'd'), array('e', 'e')),
@@ -50,7 +48,7 @@ class ParsersTest extends \PHPUnit_Framework_TestCase
     public function testRepsep()
     {
         $input = 'a,a,a';
-        $parser_a = Parsers::repsep(Parsers::s('a'), Parsers::s(','));
+        $parser_a = Parser::repsep(Parser::s('a'), Parser::s(','));
         $this->assertEquals(
             array(array('a', 'a', 'a')),
             $parser_a->parse($input)->get()
@@ -60,14 +58,14 @@ class ParsersTest extends \PHPUnit_Framework_TestCase
     public function testBetween()
     {
         $input = '((a))';
-        $parser_a = Parsers::between(
-            Parsers::s('('),
-            Parsers::between(
-                Parsers::s('('),
-                Parsers::s('a'),
-                Parsers::s(')')
+        $parser_a = Parser::between(
+            Parser::s('('),
+            Parser::between(
+                Parser::s('('),
+                Parser::s('a'),
+                Parser::s(')')
             ),
-            Parsers::s(')')
+            Parser::s(')')
         );
         $this->assertEquals(
             array('a'),
