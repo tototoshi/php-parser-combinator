@@ -6,12 +6,12 @@ use PHPParserCombinator\Result\Failure;
 use PHPParserCombinator\Result\ParsedValue;
 use PHPParserCombinator\Result\Success;
 
-class StringParser extends Parser implements ParserInterface
+class StringParser extends AbstractParser implements ParserInterface
 {
 
     private $value;
 
-    public function __construct($value, Callable $transformer = null)
+    public function __construct($value, callable $transformer = null)
     {
         $this->value = $value;
 

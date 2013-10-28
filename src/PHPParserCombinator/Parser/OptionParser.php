@@ -5,7 +5,7 @@ namespace PHPParserCombinator\Parser;
 use PHPParserCombinator\Result\ParsedValue;
 use PHPParserCombinator\Result\Success;
 
-class OptionParser extends Parser implements ParserInterface {
+class OptionParser extends AbstractParser implements ParserInterface {
 
     private $parser;
 

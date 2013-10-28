@@ -26,6 +26,6 @@ interface ParserInterface {
      * @param callable $transformer
      * @return ParserInterface
      */
-    function setTransformer(Callable $transformer);
+    function setTransformer(callable $transformer);
 
 }

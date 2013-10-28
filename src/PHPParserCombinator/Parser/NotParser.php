@@ -7,7 +7,7 @@ use PHPParserCombinator\Result\Failure;
 use PHPParserCombinator\Result\ParsedValue;
 use PHPParserCombinator\Result\Success;
 
-class NotParser extends Parser implements ParserInterface {
+class NotParser extends AbstractParser implements ParserInterface {
 
     private $parser;
 

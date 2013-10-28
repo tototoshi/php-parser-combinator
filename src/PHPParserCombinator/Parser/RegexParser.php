@@ -5,7 +5,7 @@ use PHPParserCombinator\Result\Failure;
 use PHPParserCombinator\Result\ParsedValue;
 use PHPParserCombinator\Result\Success;
 
-class RegexParser extends Parser implements ParserInterface
+class RegexParser extends AbstractParser implements ParserInterface
 {
     private $regex;
 

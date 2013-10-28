@@ -5,7 +5,7 @@ namespace PHPParserCombinator\Parser;
 use PHPParserCombinator\Result\ParsedValue;
 use PHPParserCombinator\Result\Success;
 
-class SequenceParser extends Parser implements ParserInterface
+class SequenceParser extends AbstractParser implements ParserInterface
 {
     /**
      * @var ParserInterface $left

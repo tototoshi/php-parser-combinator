@@ -5,7 +5,7 @@ namespace PHPParserCombinator\Parser;
 use PHPParserCombinator\Result\ParsedValue;
 use PHPParserCombinator\Result\Success;
 
-class RepetitionParser extends Parser implements ParserInterface {
+class RepetitionParser extends AbstractParser implements ParserInterface {
 
     private $parser;
 

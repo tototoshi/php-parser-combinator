@@ -6,7 +6,7 @@ use PHPParserCombinator\Transformer\Transformer;
 
 class Parsers {
 
-    public static function withParserSetting(array $setting, Callable $callable)
+    public static function withParserSetting(array $setting, callable $callable)
     {
         if (isset($setting['skipWhitespace'])) {
             $skip_whitespace = $setting['skipWhitespace'];

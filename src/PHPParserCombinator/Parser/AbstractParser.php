@@ -5,7 +5,7 @@ namespace PHPParserCombinator\Parser;
 
 use PHPParserCombinator\Transformer\Transformer;
 
-abstract class Parser {
+abstract class AbstractParser {
 
     protected $transformer;
 
@@ -13,7 +13,7 @@ abstract class Parser {
      * @param callable $transformer
      * @return $this
      */
-    public function setTransformer(Callable $transformer)
+    public function setTransformer(callable $transformer)
     {
         $this->transformer = $transformer;
         return $this;
