@@ -83,6 +83,20 @@ class Parser {
     }
 
     /**
+     * A parser generator for non-empty repetitions.
+     *
+     * @param ParserInterface $p
+     * @return ParserInterface
+     */
+    public static function rep1(ParserInterface $p)
+    {
+        return $p->next(new RepetitionParser($p))->setTransformer(function($value) {
+            list($x, $y) = $value;
+            return array(array_merge(array($x), $y));
+        });
+    }
+
+    /**
      * A parser generator for a specified number of repetitions.
      *
      * @param $n
@@ -104,6 +118,22 @@ class Parser {
      */
     public static function repsep(ParserInterface $p, ParserInterface $sep)
     {
+        $e = new EmptyParser();
+        $e->setTransformer(function($value) {
+            return array($value);
+        });
+        return self::rep1sep($p, $sep)->orElse($e);
+    }
+
+    /**
+     * A parser generator for non-empty interleaved repetitions.
+     *
+     * @param ParserInterface $p
+     * @param ParserInterface $sep
+     * @return ParserInterface
+     */
+    public static function rep1sep(ParserInterface $p, ParserInterface $sep)
+    {
         return $p
             ->next(
                 Parser::rep(
@@ -117,6 +147,7 @@ class Parser {
     }
 
     /**
+     * A wrapper for a parser between parsers.
      *
      * @param ParserInterface $begin
      * @param ParserInterface $p
