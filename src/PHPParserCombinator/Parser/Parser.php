@@ -6,6 +6,10 @@ use PHPParserCombinator\Transformer\Transformer;
 
 class Parser {
 
+    /**
+     * @param array $setting
+     * @param callable $callable
+     */
     public static function withParserSetting(array $setting, callable $callable)
     {
         if (isset($setting['skipWhitespace'])) {
@@ -24,6 +28,8 @@ class Parser {
     }
 
     /**
+     * A parser generator for string
+     *
      * @param string $s
      * @return StringParser
      */
@@ -33,6 +39,8 @@ class Parser {
     }
 
     /**
+     * A parser generator for optional sub-phrases
+     *
      * @param ParserInterface $p
      * @return OptionParser
      */
@@ -42,6 +50,8 @@ class Parser {
     }
 
     /**
+     * Wrap a parser so that its failures and errors become success and vice versa -- it never consumes any input.
+     *
      * @param ParserInterface $p
      * @return NotParser
      */
@@ -51,6 +61,8 @@ class Parser {
     }
 
     /**
+     * A parser generator for regular expression.
+     *
      * @param string $reg regular expression
      * @return RegexParser
      */
@@ -60,6 +72,8 @@ class Parser {
     }
 
     /**
+     * A parser generator for repetitions.
+     *
      * @param ParserInterface $p
      * @return RepetitionParser
      */
@@ -69,6 +83,8 @@ class Parser {
     }
 
     /**
+     * A parser generator for a specified number of repetitions.
+     *
      * @param $n
      * @param ParserInterface $p
      * @return RepetitionParser
@@ -80,6 +96,8 @@ class Parser {
     }
 
     /**
+     * A parser generator for interleaved repetitions.
+     *
      * @param ParserInterface $p
      * @param ParserInterface $sep
      * @return ParserInterface
@@ -99,6 +117,7 @@ class Parser {
     }
 
     /**
+     *
      * @param ParserInterface $begin
      * @param ParserInterface $p
      * @param ParserInterface $end
