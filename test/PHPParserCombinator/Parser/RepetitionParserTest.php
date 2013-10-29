@@ -4,6 +4,16 @@ namespace PHPParserCombinator\Parser;
 class RepetitionParserTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function testEmpty()
+    {
+        $input = '';
+        $parser_a = new RepetitionParser(new StringParser("a"));
+        $this->assertEquals(
+            array(array()),
+            $parser_a->parse($input)->get()
+        );
+    }
+
     public function testParse()
     {
         $input = 'aaa';
