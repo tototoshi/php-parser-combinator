@@ -61,34 +61,30 @@ class Parser {
 
     /**
      * @param ParserInterface $p
-     * @param array $option
      * @return RepetitionParser
      */
-    public static function rep(ParserInterface $p, array $option = array())
+    public static function rep(ParserInterface $p)
     {
-        return new RepetitionParser($p, $option);
+        return new RepetitionParser($p);
     }
 
     /**
      * @param $n
      * @param ParserInterface $p
-     * @param array $option
      * @return RepetitionParser
      */
-    public static function repN($n, ParserInterface $p, array $option = array())
+    public static function repN($n, ParserInterface $p)
     {
-        $option_times = array('times' => $n);
-        $option = array_merge($option_times, $option);
+        $option = array('times' => $n);
         return new RepetitionParser($p, $option);
     }
 
     /**
      * @param ParserInterface $p
      * @param ParserInterface $sep
-     * @param array $option
      * @return ParserInterface
      */
-    public static function repsep(ParserInterface $p, ParserInterface $sep, array $option = array())
+    public static function repsep(ParserInterface $p, ParserInterface $sep)
     {
         return $p
             ->next(
