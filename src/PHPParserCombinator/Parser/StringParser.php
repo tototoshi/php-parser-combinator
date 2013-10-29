@@ -13,6 +13,9 @@ class StringParser extends AbstractParser implements ParserInterface
 
     public function __construct($value, callable $transformer = null)
     {
+        if ($value === '') {
+            throw new \InvalidArgumentException('Creating parser with empty string is not allowed.');
+        }
         $this->value = $value;
 
     }
